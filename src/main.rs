@@ -22,7 +22,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         let product_count = &re.captures(&response).unwrap()[1];
         let product_count: u8 = product_count.parse()?;
 
-        if product_count > initial_product_count {
+        if product_count != initial_product_count {
             println!("******************************************");
             println!("******************************************");
             println!("******************************************");
