@@ -8,7 +8,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let client = reqwest::Client::builder().build()?;
 
-    let mut total_product_count: u8 = 76;
+    let initial_product_count: u8 = 76;
 
     loop {
         let response = client
@@ -22,9 +22,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         let product_count = &re.captures(&response).unwrap()[1];
         let product_count: u8 = product_count.parse()?;
 
-        println!("{:?}", product_count);
-
-        if product_count > total_product_count {
+        if product_count > initial_product_count {
             println!("******************************************");
             println!("******************************************");
             println!("******************************************");
@@ -32,9 +30,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             println!("******************************************");
             println!("******************************************");
             println!("******************************************");
-
-            total_product_count = product_count;
         }
+
+        println!("Products number: {product_count}");
 
         sleep(Duration::from_secs(60)).await;
     }
